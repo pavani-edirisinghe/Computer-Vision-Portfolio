@@ -1,0 +1,16 @@
+# Environments
+.venv/
+venv/
+env/
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# IDEs
+.idea/
+.vscode/
+
+# Massive Media Files (Do not upload video files to GitHub)
+*.mp4
+*.mov
