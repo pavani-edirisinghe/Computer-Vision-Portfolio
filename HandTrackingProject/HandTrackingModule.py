@@ -13,6 +13,11 @@ class handDetector():
         self.hands = self.mpHands.Hands(static_image_mode=self.mode, max_num_hands=self.maxHands, min_detection_confidence=self.detectionCon, min_tracking_confidence=self.trackCon)
         self.mpDraw = mp.solutions.drawing_utils
 
+        # Landmark dots (Red)
+        self.lmkStyle = self.mpDraw.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2)
+        # Connection edges (Green)
+        self.conStyle = self.mpDraw.DrawingSpec(color=(0, 255, 0), thickness=2)
+
     def findHands(self, img, draw=True):
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.results = self.hands.process(imgRGB)
@@ -21,7 +26,7 @@ class handDetector():
         if self.results.multi_hand_landmarks:
             for handLms in self.results.multi_hand_landmarks:
                 if draw:
-                    self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS)
+                    self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS, self.lmkStyle, self.conStyle)
         return img
 
 
